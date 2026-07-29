@@ -6,7 +6,9 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 from amadeusgpt.programs.api_registry import INTEGRATION_API_REGISTRY
 
-client = OpenAI()
+
+def _get_client():
+    return OpenAI()
 
 
 class IntegrationModuleHub:
@@ -15,6 +17,7 @@ class IntegrationModuleHub:
 
     def save_embeddings(self):
         result = {}
+        client = _get_client()
         model = "text-embedding-3-small"
         for module_name, module_info in INTEGRATION_API_REGISTRY.items():
             docstring = module_info["description"]
@@ -32,6 +35,7 @@ class IntegrationModuleHub:
             print("No module found")
 
     def match_module(self, query):
+        client = _get_client()
         model = "text-embedding-3-small"
 
         query_embedding = (

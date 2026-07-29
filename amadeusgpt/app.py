@@ -37,6 +37,7 @@ def main():
         if check_valid:
             st.session_state["exist_valid_openai_api_key"] = True
             st.session_state["OPENAI_API_KEY"] = api_token
+            os.environ["OPENAI_API_KEY"] = api_token
             st.success("OpenAI API Key Validated!")
         else:
             st.error("Invalid OpenAI API Key")
@@ -57,8 +58,6 @@ def main():
         st.image(
             logo_path,
             caption=None,
-            width=None,
-            use_column_width=None,
             clamp=False,
             channels="RGB",
             output_format="auto",

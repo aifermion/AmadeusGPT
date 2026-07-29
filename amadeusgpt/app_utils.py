@@ -494,12 +494,12 @@ def get_identifier(example: str) -> Identifier:
         template_config_path = os.path.join(root_dir, "configs", "Horse_template.yaml")
     elif example == "MausHaus":
         template_config_path = os.path.join(
-            root_dir, "configs", "maushaus_template.yaml"
+            root_dir, "configs", "MausHaus_template.yaml"
         )
     elif example == "EPM":
         template_config_path = os.path.join(root_dir, "configs", "EPM_template.yaml")
     elif example == "MABe":
-        template_config_path = os.path.join(root_dir, "configs", "mabe_template.yaml")
+        template_config_path = os.path.join(root_dir, "configs", "MABe_template.yaml")
     elif example == "Custom":
         template_config_path = os.path.join(root_dir, "configs", "Custom_template.yaml")
 
@@ -539,8 +539,6 @@ def render_page_by_example(example):
     st.image(
         logo_path,
         caption=None,
-        width=None,
-        use_column_width=None,
         clamp=False,
         channels="RGB",
         output_format="auto",

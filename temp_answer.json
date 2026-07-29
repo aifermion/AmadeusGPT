@@ -1,0 +1,37 @@
+{
+    "chain_of_thought": "To plot the trajectory of the animal, we need to extract the keypoint data for the animal's position over time. The trajectory can be represented by plotting the x and y coordinates of a specific keypoint (e.g., the 'nose' or 'mid_back') across the frames of the video.\n\nHere's how we can achieve this:\n\n1. Retrieve the keypoints for the animal using the `get_keypoints()` function.\n2. Extract the x and y coordinates for the chosen keypoint.\n3. Create a plot of these coordinates to visualize the trajectory.\n\nLet's proceed with the implementation:\n\n```python\ndef plot_animal_trajectory(identifier):\n    '''\n    Parameters:\n    ----------\n    identifier: Identifier. Contains information about the video, keypoint and config.\n    \n    Returns:\n    -------\n    tuple: (figure, axs) containing the plot of the animal's trajectory.\n    '''\n    # create_analysis returns an instance of AnimalBehaviorAnalysis\n    analysis = create_analysis(identifier)\n    \n    # Get keypoints data\n    keypoints = analysis.get_keypoints()  # shape: (n_frames, n_individuals, n_kpts, n_dims)\n    \n    # Get the index for the 'nose' keypoint\n    keypoint_names = analysis.get_keypoint_names()\n    nose_index = keypoint_names.index('nose')  # Get the index of the 'nose' keypoint\n    \n    # Extract x and y coordinates for the 'nose' keypoint\n    nose_keypoints = keypoints[:, 0, nose_index, :]  # shape: (n_frames, 2)\n    x_coords = nose_keypoints[:, 0]  # x coordinates\n    y_coords = nose_keypoints[:, 1]  # y coordinates\n    \n    # Create the plot\n    figure, axs = plt.subplots()\n    axs.plot(x_coords, y_coords, marker='o', linestyle='-', color='b')\n    \n    # Set limits to cover the whole image\n    axs.set_xlim(0, 800)  # width of the image\n    axs.set_ylim(0, 600)  # height of the image\n    axs.set_title(\"Animal Trajectory\")\n    axs.set_xlabel(\"X Coordinate\")\n    axs.set_ylabel(\"Y Coordinate\")\n    \n    return figure, axs\n``` \n\nThis function will plot the trajectory of the animal based on the 'nose' keypoint's coordinates over time. The x and y limits are set to cover the entire image dimensions.",
+    "code": "\ndef plot_animal_trajectory(identifier):\n    '''\n    Parameters:\n    ----------\n    identifier: Identifier. Contains information about the video, keypoint and config.\n    \n    Returns:\n    -------\n    tuple: (figure, axs) containing the plot of the animal's trajectory.\n    '''\n    # create_analysis returns an instance of AnimalBehaviorAnalysis\n    analysis = create_analysis(identifier)\n    \n    # Get keypoints data\n    keypoints = analysis.get_keypoints()  # shape: (n_frames, n_individuals, n_kpts, n_dims)\n    \n    # Get the index for the 'nose' keypoint\n    keypoint_names = analysis.get_keypoint_names()\n    nose_index = keypoint_names.index('nose')  # Get the index of the 'nose' keypoint\n    \n    # Extract x and y coordinates for the 'nose' keypoint\n    nose_keypoints = keypoints[:, 0, nose_index, :]  # shape: (n_frames, 2)\n    x_coords = nose_keypoints[:, 0]  # x coordinates\n    y_coords = nose_keypoints[:, 1]  # y coordinates\n    \n    # Create the plot\n    figure, axs = plt.subplots()\n    axs.plot(x_coords, y_coords, marker='o', linestyle='-', color='b')\n    \n    # Set limits to cover the whole image\n    axs.set_xlim(0, 800)  # width of the image\n    axs.set_ylim(0, 600)  # height of the image\n    axs.set_title(\"Animal Trajectory\")\n    axs.set_xlabel(\"X Coordinate\")\n    axs.set_ylabel(\"Y Coordinate\")\n    \n    return figure, axs\n",
+    "video_file_paths": [
+        "examples/MausHaus/maushaus_trimmed.mp4"
+    ],
+    "keypoint_file_paths": [
+        "examples/MausHaus/maushaus_trimmed.h5"
+    ],
+    "config": {
+        "keypoint_info": {
+            "body_orientation_keypoints": {
+                "neck": "nose",
+                "tail_base": "tail_base",
+                "animal_center": "neck"
+            },
+            "head_orientation_keypoints": {
+                "nose": "nose",
+                "neck": "neck"
+            }
+        },
+        "llm_info": {
+            "keep_last_n_messages": 2
+        },
+        "object_info": {
+            "load_objects_from_disk": false
+        },
+        "video_info": {
+            "scene_frame_number": 100
+        },
+        "data_info": {
+            "data_folder": "examples/MausHaus",
+            "video_suffix": ".mp4",
+            "result_folder": "results"
+        }
+    }
+}

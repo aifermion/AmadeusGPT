@@ -1,0 +1,14 @@
+data_info:
+  data_folder: ../examples/Horse
+  result_folder: results
+  video_suffix: .mp4
+keypoint_info:
+  include_confidence: false
+  use_3d: false
+llm_info:
+  gpt_model: gpt-4o
+object_info:
+  load_objects_from_disk: false
+  use_grid_objects: false
+video_info:
+  scene_frame_number: 100
